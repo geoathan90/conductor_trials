@@ -1,33 +1,30 @@
-# sympy_cubic_stringing.py
-# Minimal SymPy solve for H2, then sag. Parabolic model.
-
 from sympy import symbols, Eq, solve, re, N
 from math import isfinite
 import sys
 
-# ---- Input (edit these) ----
-S = 290.00         # span (m)
-dh = -95.12        # elevation difference h_R - h_L (m). Use 0 for level supports.
-w = 1.823          # unit weight (N/m) per HORIZONTAL length
-A = 5.47e-4        # area (m^2)
-E = 6.18e9         # Young's modulus (Pa)
-alpha = 1.935e-5     # thermal expansion (1/°C)
-T1 = 50.0          # initial temp (°C)
-T2 = -18.0         # new temp (°C)
+# ---- Input (edit accordingly) ----
+a = 290.00          # span (m)
+dh = -95.12         # elevation difference h_R - h_L (m). Use 0 for level supports.
+w = 1.823           # unit weight (N/m) per HORIZONTAL length
+S = 5.47e-4         # area (m^2)
+E = 6.18e9          # Young's modulus (Pa)
+e = 1.935e-5        # thermal expansion (1/°C)
+T1 = 10.0           # initial temp (°C)
+T2 = 20.0          # new temp (°C)
 H1 = 9.80665 * 2585.0      # initial horizontal tension (N) (from your measured sag)
-#H1 = float(sys.argv[1])*9.80665
+
 
 # ---- Constants ----
-b = 1.0 / (E * A)
-k = (w**2 * S**2) / 24.0
-dT = T2 - T1
+ac = e*S*E*(T2-T1)-H1+a**2*S*E*w**2/24/H1**2
+bc = a**2*w**2/24
+cc = e*(T2-T1)*S*E*w**2*a**2/24 - H1*w**2*a**2/24 - S*E**w**2*a**2/24
 
-# Cubic: b*H2^3 + (alpha*dT - b*H1 + k/H1^2)*H2^2 - k = 0
+# Cubic
 H2 = symbols('H2', real=True)
-c2 = alpha * dT - b * H1 + (k / (H1**2))
-eq = Eq(b*H2**3 + c2*H2**2 - k, 0)
+eq = Eq(H2**3 + ac*H2**2 + bc*H2 + cc, 0)
 
 roots = solve(eq, H2)  # symbolic roots
+
 # Pick the physically valid root: real, positive, finite
 candidates = []
 for r in roots:
