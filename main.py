@@ -17,7 +17,7 @@ H1 = 9.80665 * 2585.0      # initial horizontal tension (N) (from your measured 
 # ---- Constants ----
 ac = e*S*E*(T2-T1)-H1+a**2*S*E*w**2/24/H1**2
 bc = a**2*w**2/24
-cc = e*(T2-T1)*S*E*w**2*a**2/24 - H1*w**2*a**2/24 - S*E**w**2*a**2/24
+cc = e*(T2-T1)*S*E*w**2*a**2/24 - H1*w**2*a**2/24 - S*E*w**2*a**2/24
 
 # Cubic
 H2 = symbols('H2', real=True)
