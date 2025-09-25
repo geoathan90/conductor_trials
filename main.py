@@ -42,18 +42,3 @@ print(f"H2 = {H2_sol*0.102:.3f} kp")
 ###############################################
 
 
-# ---- Sag (parabolic) ----
-# If supports are level: f = w S^2 / (8 H2)
-f_mid = w * S**2 / (8.0 * H2_sol)
-
-# If supports are at different heights, the lowest point shifts:
-# x0 = S/2 + (H2*dh)/(w*S)
-x0 = S/2.0 + (H2_sol * dh) / (w * S)
-# Sag relative to each support (parabolic)
-fL = (w / (2.0 * H2_sol)) * x0 * (S - x0)
-fR = fL  # symmetric formula; clearances differ due to support heights
-
-# print(f"Sag at mid (level supports)   f = {f_mid:.3f} m")
-# print(f"Lowest point from left        x0 = {x0:.3f} m  (useful when dh ≠ 0)")
-# print(f"Sag rel. to left support     fL = {fL:.3f} m")
-# print(f"Sag rel. to right support    fR = {fR:.3f} m")
