@@ -6,17 +6,17 @@ from math import isfinite, sinh, asinh
 import sys
 
 # ---- Input (edit these) ----
-S = 716.72         # span (m)
-dh = 37.54        # elevation difference h_R - h_L (m). Use 0 for level supports.
+S = 215         # span (m)
+dh = -63.19        # elevation difference h_R - h_L (m). Use 0 for level supports.
 w = 1.823          # unit weight (N/m) per HORIZONTAL length
 A = 5.47e-4        # area (m^2)
 E = 6.18e9         # Young's modulus (Pa)
 alpha = 1.935e-5     # thermal expansion (1/°C)
 T1 = 50.0          # initial temp (°C)
 T2 = -18.0         # new temp (°C)
-H1 = 9.80665 * 2585.0
-H1_old = H1      # initial horizontal tension (N) (from your measured sag)
-#H1 = float(sys.argv[1])*9.80665
+H1 = 2585          # initial horizontal tension (N)(kp)
+H1_old = H1      #  archive
+#H1 = float(sys.argv[1])
 
 # ---- Constants ----
 b = 1.0 / (E * A)
@@ -40,8 +40,11 @@ if not candidates:
     raise RuntimeError("No positive real root for H2. Check inputs.")
 
 H2_sol = max(candidates)  # tensions are typically the largest positive real root
-print(f"H1 = {H1*0.102:.3f} kp")
-print(f"H2 = {H2_sol*0.102:.3f} kp")
+#print(f"H1 = {H1*0.102:.3f} kp")
+#print(f"H2 = {H2_sol*0.102:.3f} kp")
+
+print(f"H1 = {H1:.3f} kp")
+print(f"H2 = {H2_sol:.3f} kp")
 
 ###############################################
 
@@ -62,8 +65,8 @@ x0_old = -H1_old/w*asinh(dh/2/(H1_old/w)/sinh(S/2/(H1_old/w)))+S/2
 fL = (w / (2.0 * H2_sol)) * x0 * (S - x0)
 fR = fL  # symmetric formula; clearances differ due to support heights
 
-# print(f"Sag at mid (level supports)   f = {f_mid:.3f} m")
-# print(f"Lowest point from left for H1       x0_old = {x0:.3f} m  ")
-# print(f"Lowest point from left for H2       x0 = {x0:.3f} m  ") #(useful when dh ≠ 0)
+#print(f"Sag at mid (level supports)   f = {f_mid:.3f} m")
+print(f"x0_old = {x0_old:.3f} m  ")
+print(f"x0 = {x0:.3f} m  ") #(useful when dh ≠ 0)
 # print(f"Sag rel. to left support     fL = {fL:.3f} m")
 # print(f"Sag rel. to right support    fR = {fR:.3f} m")
