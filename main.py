@@ -70,7 +70,7 @@ def monopleyro_left(S,dh,H=H1,w=w):
     if monopleyro <= 0: print("δεν υπάρχει μονόπλευρο φορτίο") 
     else: return monopleyro
 
-def synoliko_katakoryfo(S_r,dh_r,H_r,S_l,dh_l,H_l):
+def synoliko_katakoryfo(S_l,dh_l,H_l,S_r,dh_r,H_r):
     return distance_lowest_point_r(S_r,dh_r,H_r) + distance_lowest_point_l(S_l,dh_l,H_l)
 
 #print(f"Sag at mid (level supports)   f = {f_mid:.3f} m")
