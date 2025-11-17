@@ -18,6 +18,13 @@ H1 = 442           # initial horizontal tension (kg)   ex:2585 για τις μ�
 H1_old = H1         #  archive
 #H1 = float(sys.argv[1])
 
+S1 = 377.52 #pyrgos 22
+dh1 = -85.42
+S2 = 369.70 #pyrgos 25
+dh2 = -70.70
+
+### note: νομίζω έχουν υπολογίσει τα βάρη στους -10 με γυμνό αγωγό 
+
 def solve_for_H2(S,H1,T1,T2,w1=w,w2=w):
 
     # Coefficients
