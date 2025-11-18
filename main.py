@@ -53,7 +53,7 @@ def solve_for_H2(S,H1,T1,T2,w1=w,w2=w):
 
     return H2_sol
 
-def sag(S, H):
+def sag(S, H, w):
     return w * S**2 / (8.0 * H)
 
 def Th_from_sag(sag, S, w):
@@ -82,6 +82,6 @@ def synoliko_katakoryfo(S_l,dh_l,H_l,S_r,dh_r,H_r):
 
 #print(f"Sag at mid (level supports)   f = {f_mid:.3f} m")
 #print(f"x0_old = {x0_old:.3f} m  ")
-#print(f"x0 = {x0:.3f} m  ") #(useful when dh ≠ 0)
+#print(f"x0 = {x0:.3f} m  ")
 
 # examples (290,-95.12,2585), (316.72,37.54,2585), (377.52,-85.42,2585)
